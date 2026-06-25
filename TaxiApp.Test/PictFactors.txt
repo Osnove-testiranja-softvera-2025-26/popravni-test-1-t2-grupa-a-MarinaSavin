@@ -1,0 +1,28 @@
+# zone: Blue, Green, Red
+# hour: [0,6], [7,9], [10,25]
+# numOfInterections: [0,2], [3,10], [11,inf]
+# weatherConditions: Rainy, Stormy, Sunny
+# railwayCrossing: true, false
+
+zone : Blue, Green, Red
+hour: 0, 3, 6, 7, 8, 9, 10, 17, 23
+numOfInterections: 0, 1, 2, 3, 7, 10, 11, 30, 50
+weatherConditions: Rainy, Stormy, Sunny
+railwayCrossing: true, false
+crowdFactor: 0, 30, 35, 40, 45, 50
+ 
+ IF [weatherConditions] = "Rainy" AND [zone] = "Red" AND [numOfInterections] > 10 AND [railwayCrossing] = "true" THEN [crowdFactor] = 45;
+ IF [weatherConditions] = "Rainy" AND [zone] = "Red" AND [numOfInterections] > 10 AND [railwayCrossing] = "false" THEN [crowdFactor] = 40;
+ IF [weatherConditions] = "Rainy" AND [zone] = "Blue" AND [hour] >= 7 AND [hour] <= 9 THEN [crowdFactor] = 35;
+ IF [weatherConditions] = "Rainy" AND [zone] = "Blue" AND ( [hour] < 7 OR [hour] > 9 ) THEN [crowdFactor] = 30;
+ IF [weatherConditions] = "Rainy" AND [zone] = "Red" AND [numOfInterections] <= 10 THEN [crowdFactor] = 30;
+ IF [weatherConditions] = "Rainy" AND [zone] = "Green" THEN [crowdFactor] = 30;
+
+ IF [weatherConditions] = "Stormy" AND [zone] = "Green" AND [numOfInterections] >= 3 THEN [crowdFactor] = 50;
+ IF [weatherConditions] = "Stormy" AND [zone] = "Green" AND [numOfInterections] < 3 THEN [crowdFactor] = 45;
+ IF [weatherConditions] = "Stormy" AND [zone] = "Red" THEN [crowdFactor] = 45;
+ IF [weatherConditions] = "Stormy" AND [zone] = "Blue" THEN [crowdFactor] = 45;
+
+ IF [weatherConditions] = "Sunny" THEN [crowdFactor] = 0;
+ 
+ 
